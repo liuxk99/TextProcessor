@@ -12,16 +12,16 @@ class TextProcessorV1 {
         // 步骤3
         val map = words.getWordCount()
         // 步骤4
-        val list = sortByFrequency(map)
+        val list = map.sortByFrequency()
 
         return list
         // 简略写法
         // sortByFrequency(getWordCount(clean(text).split(" ")))
     }
 
-    fun sortByFrequency(map: Map<String, Int>): MutableList<WordFreq> {
+    fun Map<String, Int>.sortByFrequency(): MutableList<WordFreq> {
         val list = mutableListOf<WordFreq>()
-        for (entry in map) {
+        for (entry in this) {
             if (entry.key == "") continue
             val freq = WordFreq(entry.key, entry.value)
             // ①
