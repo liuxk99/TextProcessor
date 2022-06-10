@@ -10,7 +10,7 @@ class TextProcessorV1 {
         // 步骤2
         val words = cleaned.split(" ")
         // 步骤3
-        val map = getWordCount(words)
+        val map = words.getWordCount()
         // 步骤4
         val list = sortByFrequency(map)
 
@@ -35,14 +35,11 @@ class TextProcessorV1 {
         return list
     }
 
-    fun getWordCount(list: List<String>): Map<String, Int> {
-        val map = hashMapOf<String, Int>()
-
-        for (word in list) {
-            // ①
-            if (word == "") continue
-            val trim = word.trim()
-            // ②
+    private fun List<String>.getWordCount(): Map<String, Int> {
+        val map = HashMap<String, Int>()
+        for (element in this) {
+            if (element == "") continue
+            val trim = element.trim()
             val count = map.getOrDefault(trim, 0)
             map[trim] = count + 1
         }
