@@ -6,7 +6,7 @@ import java.io.File
 class TextProcessorV1 {
     fun processText(text: String): List<WordFreq> {
         // 步骤1
-        val cleaned = clean(text)
+        val cleaned = text.clean()
         // 步骤2
         val words = cleaned.split(" ")
         // 步骤3
@@ -49,8 +49,9 @@ class TextProcessorV1 {
         return map
     }
 
-    fun clean(text: String): String {
-        return text.replace("[^A-Za-z]".toRegex(), " ")
+    // 转换成扩展函数
+    fun String.clean(): String {
+        return this.replace("[^A-Za-z]".toRegex(), " ")
             .trim()
     }
 
