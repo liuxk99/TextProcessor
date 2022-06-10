@@ -16,6 +16,7 @@ class TestExample {
         val processor = TextProcessorV1()
         val results = processor.processText(text)
         assertEquals(2, results[0].frequency)
+        assertEquals(1, results[1].frequency)
     }
 
     @Test

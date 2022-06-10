@@ -5,18 +5,20 @@ import java.io.File
 
 class TextProcessorV1 {
     fun processText(text: String): List<WordFreq> {
-        // 步骤1
-        val cleaned = text.clean()
-        // 步骤2
-        val words = cleaned.split(" ")
-        // 步骤3
-        val map = words.getWordCount()
-        // 步骤4
-        val list = map.sortByFrequency()
+        return text.clean()
+            .split(" ")
+            .getWordCount()
+            .mapToList { WordFreq(it.key, it.value) }
+            .sortedByDescending { it.frequency }
+    }
 
+    private fun <T> Map<String, Int>.mapToList(transform: (Map.Entry<String, Int>) -> T): MutableList<T> {
+        val list = mutableListOf<T>()
+        for (entry in this) {
+            val freq = transform(entry)
+            list.add(freq)
+        }
         return list
-        // 简略写法
-        // sortByFrequency(getWordCount(clean(text).split(" ")))
     }
 
     fun Map<String, Int>.sortByFrequency(): MutableList<WordFreq> {
